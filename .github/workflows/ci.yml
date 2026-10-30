@@ -1,0 +1,65 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  app:
+    runs-on: ubuntu-latest
+    env:
+      EXPO_PUBLIC_SUPABASE_URL: http://127.0.0.1:54321
+      EXPO_PUBLIC_SUPABASE_ANON_KEY: ci-placeholder-anon-key-not-a-secret
+      EXPO_PUBLIC_APP_ENV: development
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: npm run lint
+      - run: npm run typecheck
+      - run: npm run format:check
+      - run: npm test -- --ci
+
+  functions:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: denoland/setup-deno@v2
+        with:
+          deno-version: v2.x
+      - name: Check, lint and test edge functions
+        run: |
+          if [ ! -d supabase/functions ]; then echo "No edge functions yet"; exit 0; fi
+          deno fmt --check supabase/functions
+          deno lint supabase/functions
+          deno test --allow-env --allow-read --permit-no-files supabase/functions
+
+  database:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: supabase/setup-cli@v1
+        with:
+          version: 2.122.0
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: cp supabase/.env.example supabase/.env
+      - run: supabase start -x studio,imgproxy,inbucket,edge-runtime,logflare,vector
+      - run: supabase db lint --schema public --fail-on error
+      - run: supabase test db
+      - name: Generated types are up to date
+        run: |
+          cp types/database.ts /tmp/database.committed.ts
+          npm run db:types
+          diff -u /tmp/database.committed.ts types/database.ts

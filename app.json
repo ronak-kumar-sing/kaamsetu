@@ -1,0 +1,60 @@
+{
+  "expo": {
+    "name": "KaamSetu",
+    "slug": "kaamsetu",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "automatic",
+    "ios": {
+      "supportsTablet": false,
+      "bundleIdentifier": "in.kaamsetu.app"
+    },
+    "android": {
+      "adaptiveIcon": {
+        "backgroundColor": "#E6F4FE",
+        "foregroundImage": "./assets/android-icon-foreground.png",
+        "backgroundImage": "./assets/android-icon-background.png",
+        "monochromeImage": "./assets/android-icon-monochrome.png"
+      },
+      "predictiveBackGestureEnabled": false,
+      "package": "in.kaamsetu.app"
+    },
+    "plugins": [
+      "expo-router",
+      "expo-secure-store",
+      "expo-sqlite",
+      "expo-web-browser",
+      "expo-localization",
+      [
+        "expo-notifications",
+        {
+          "color": "#0F766E"
+        }
+      ],
+      [
+        "expo-image-picker",
+        {
+          "photosPermission": "KaamSetu uses your photos for your avatar, portfolio, check-ins and ID verification.",
+          "cameraPermission": "KaamSetu uses the camera to capture work progress and ID documents."
+        }
+      ],
+      [
+        "expo-splash-screen",
+        {
+          "image": "./assets/splash-icon.png",
+          "imageWidth": 160,
+          "resizeMode": "contain",
+          "backgroundColor": "#F8FAFC",
+          "dark": {
+            "backgroundColor": "#020617"
+          }
+        }
+      ]
+    ],
+    "scheme": "kaamsetu",
+    "experiments": {
+      "typedRoutes": true
+    }
+  }
+}
