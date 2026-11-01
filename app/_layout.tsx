@@ -44,7 +44,14 @@ function RootNavigator() {
     if (ready) void SplashScreen.hideAsync();
   }, [ready]);
 
-  if (!ready) return <LoadingState />;
+  // A stored session whose user no longer exists (account deleted, local DB reset) has no
+  // profile row. Treat it as signed out instead of stranding the user in onboarding.
+  const orphanedSession = isSignedIn && profile.isSuccess && profile.data === null;
+  useEffect(() => {
+    if (orphanedSession) void signOut();
+  }, [orphanedSession]);
+
+  if (!ready || orphanedSession) return <LoadingState />;
 
   // Only block the app when there is nothing cached; a failed background refetch keeps the
   // last good data on screen.

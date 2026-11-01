@@ -1,16 +1,10 @@
-import { router } from 'expo-router';
-
-import { EmptyState, Screen } from '@/components/ui';
+import { Screen } from '@/components/ui';
+import { ClientHome } from '@/features/projects/components/ClientHome';
 
 export default function ClientHomeScreen() {
   return (
-    <Screen edges={[]}>
-      <EmptyState
-        title="No active projects yet"
-        description="Projects you post and the freelancers you hire will show up here, with milestone progress at a glance."
-        actionLabel="Post a project"
-        onAction={() => router.push('/client/post-project')}
-      />
+    <Screen edges={[]} contentClassName="px-0 py-0">
+      <ClientHome />
     </Screen>
   );
 }

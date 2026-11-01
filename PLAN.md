@@ -1,3 +1,7 @@
+> **Superseded (2026-10-30).** This was the original planning document. The living docs are
+> `AGENTS.md`, `docs/STATUS.md`, `docs/ROADMAP.md`, `docs/DECISIONS.md` and `docs/BRIEF.md`.
+> It is kept for history only.
+
 # Implementation Plan — Freelancer Accountability App
 
 Status: **approved 2026-10-30 — Phase 1 in progress.** The user asked for a production-ready build;

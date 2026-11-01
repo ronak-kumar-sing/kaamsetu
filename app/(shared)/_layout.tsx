@@ -18,6 +18,11 @@ export default function SharedLayout() {
     >
       <Stack.Screen name="edit-profile" options={{ title: 'Edit profile' }} />
       <Stack.Screen name="settings" options={{ title: 'Settings' }} />
+      <Stack.Screen name="project/[id]" options={{ title: 'Project' }} />
+      <Stack.Screen name="milestone/[id]" options={{ title: 'Milestone' }} />
+      <Stack.Screen name="profile/[id]" options={{ title: 'Profile' }} />
+      <Stack.Screen name="invite/[token]" options={{ title: 'Invitation' }} />
+      <Stack.Screen name="proposal/new" options={{ title: 'Send a proposal' }} />
     </Stack>
   );
 }

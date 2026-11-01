@@ -47,7 +47,13 @@ export function Input({
           editable={editable}
           accessibilityLabel={accessibilityLabel ?? label}
           accessibilityHint={accessibilityHint ?? error ?? hint}
-          className={cn('flex-1 py-3 text-base text-foreground placeholder:text-muted', className)}
+          className={cn(
+            'flex-1 py-3 text-base text-foreground placeholder:text-muted',
+            // iOS recycles native text inputs; set letter spacing explicitly so a previous
+            // input's tracking (e.g. the OTP field) can't leak into this one.
+            !className?.includes('tracking-') && 'tracking-normal',
+            className,
+          )}
           {...rest}
         />
       </View>

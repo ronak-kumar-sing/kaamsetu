@@ -1,12 +1,10 @@
-import { EmptyState, Screen } from '@/components/ui';
+import { Screen } from '@/components/ui';
+import { FindFreelancers } from '@/features/freelancers/components/FindFreelancers';
 
 export default function FindFreelancersScreen() {
   return (
-    <Screen edges={[]}>
-      <EmptyState
-        title="Find freelancers"
-        description="Search verified freelancers by skill, city and rate. Coming soon."
-      />
+    <Screen edges={[]} contentClassName="px-0 py-0">
+      <FindFreelancers />
     </Screen>
   );
 }

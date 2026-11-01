@@ -3,6 +3,11 @@
 // validation and copy.
 
 export const MAX_MILESTONE_PCT = 30;
+/**
+ * Small projects can't meet a flat 30% cap (2 milestones force ≥ 50%), so the cap scales:
+ * cap = max(MAX_MILESTONE_PCT, ceil(MILESTONE_CAP_SLACK_PCT / count)) → 2: 60%, 3: 40%, 4+: 30%.
+ */
+export const MILESTONE_CAP_SLACK_PCT = 120;
 export const MIN_MILESTONES = 2;
 export const AUTO_APPROVE_DAYS = 5;
 export const DEFAULT_REVISION_LIMIT = 2;

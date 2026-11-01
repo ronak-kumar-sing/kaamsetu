@@ -1,16 +1,10 @@
-import { router } from 'expo-router';
-
-import { EmptyState, Screen } from '@/components/ui';
+import { Screen } from '@/components/ui';
+import { MyProposals } from '@/features/proposals/components/MyProposals';
 
 export default function ProposalsScreen() {
   return (
-    <Screen edges={[]}>
-      <EmptyState
-        title="No proposals yet"
-        description="Proposals you send to clients, and their status, will appear here."
-        actionLabel="Browse projects"
-        onAction={() => router.push('/freelancer/browse')}
-      />
+    <Screen edges={[]} contentClassName="px-0 py-0">
+      <MyProposals />
     </Screen>
   );
 }

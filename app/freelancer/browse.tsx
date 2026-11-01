@@ -1,12 +1,10 @@
-import { EmptyState, Screen } from '@/components/ui';
+import { Screen } from '@/components/ui';
+import { BrowseProjects } from '@/features/projects/components/BrowseProjects';
 
 export default function BrowseScreen() {
   return (
-    <Screen edges={[]}>
-      <EmptyState
-        title="No projects to browse yet"
-        description="Open projects that match your skills will be listed here."
-      />
+    <Screen edges={[]} contentClassName="px-0 py-0">
+      <BrowseProjects />
     </Screen>
   );
 }
